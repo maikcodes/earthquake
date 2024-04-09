@@ -3,11 +3,19 @@ require 'handlers/pagination'
 
 class Api::CommentsController < ApplicationController
   include PaginationHandler
+
   before_action :set_comment, only: %i[ show update destroy ]
 
   # GET /comments
   def index
-    @comments = Comment.paginate(page: @pagination[:page], per_page: @pagination[:per_page])
+    @comments = Comment.where(nil)
+
+    if params[:feature_id].present?
+      req_feature_id = params[:feature_id].to_i
+      @comments = @comments.by_feature_id(req_feature_id)
+    end
+
+    @comments = @comments.paginate(page: @pagination[:page], per_page: @pagination[:per_page])
 
     render json: {
       data: @comments,
@@ -27,7 +35,6 @@ class Api::CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = Comment.new(comment_params)
-    puts "Comment params: #{comment_params}"
 
     if @comment.save
       render json: @comment, status: :created

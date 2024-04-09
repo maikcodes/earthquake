@@ -6,6 +6,10 @@ class Comment < ApplicationRecord
     # associations
     belongs_to :feature
 
+    # filters
+    scope :by_feature_id, -> (id) { where(feature_id: id) }
+
+    # instance methods
     def as_json(options = {})
         {
             id: id,

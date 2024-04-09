@@ -1,6 +1,5 @@
-require 'handlers/pagination'
 require 'constants/pagination'
-
+require 'handlers/pagination'
 
 class Api::FeaturesController < ApplicationController
   include PaginationHandler
@@ -9,13 +8,11 @@ class Api::FeaturesController < ApplicationController
 
   # GET /features
   def index
-
     @features = Feature.where(nil)
 
     if params[:mag_types].present?
       req_mag_types = params[:mag_types].split(',')
       @features = @features.by_mag_type(req_mag_types)
-      puts @features.length
     end
 
     @features = @features.paginate(page: @pagination[:page], per_page: @pagination[:per_page])
@@ -37,10 +34,11 @@ class Api::FeaturesController < ApplicationController
 
   # POST /features
   def create
+    puts "create feature #{feature_params}"
     @feature = Feature.new(feature_params)
 
     if @feature.save
-      render json: @feature, status: :created, location: @feature
+      render json: @feature, status: :created
     else
       render json: @feature.errors, status: :unprocessable_entity
     end
@@ -68,6 +66,6 @@ class Api::FeaturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feature_params
-      params.require(:feature).permit(:type)
+      params.require(:feature).permit(:event_type, :external_id, :magnitude, :place, :time, :tsunami, :mag_type, :title, :longitude, :latitude, :external_link)
     end
 end

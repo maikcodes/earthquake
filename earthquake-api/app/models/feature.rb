@@ -1,4 +1,11 @@
 class Feature < ApplicationRecord
+  # callbacks
+  before_save :set_coordinates
+
+  # virtual attributes
+  attr_accessor :longitude, :latitude
+
+  # constants
   MAG_TYPES = ['md', 'ml', 'ms', 'mw', 'me', 'mi', 'mb', 'mlg']
 
   # validations
@@ -13,17 +20,18 @@ class Feature < ApplicationRecord
   validates :latitude, numericality: { greater_than_or_equal_to: -90.0, less_than_or_equal_to: 90.0 }, presence: true
   validates :external_link, presence: true
 
-  # filters
-  scope :by_mag_type, -> (mag_types) { where(mag_type: mag_types) }
-
   # associations
   has_many :comments, dependent: :destroy
 
-  def longitude
+  # filters
+  scope :by_mag_type, -> (mag_types) { where(mag_type: mag_types) }
+
+  # instance methods
+  def parse_longitude
     coordinates.x if coordinates.present?
   end
 
-  def latitude
+  def parse_latitude
     coordinates.y if coordinates.present?
   end
 
@@ -40,13 +48,19 @@ class Feature < ApplicationRecord
         mag_type: mag_type,
         title: title,
         coordinates: {
-          longitude: longitude,
-          latitude: latitude
+          longitude: parse_longitude,
+          latitude: parse_latitude
         }
       },
       links: {
         external_url: external_link
       }
     }
+  end
+
+  private
+
+  def set_coordinates
+    self.coordinates = "POINT(#{longitude} #{latitude})"
   end
 end
