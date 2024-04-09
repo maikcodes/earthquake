@@ -1,4 +1,6 @@
 require 'handlers/pagination'
+require 'constants/pagination'
+
 
 class Api::FeaturesController < ApplicationController
   include PaginationHandler
@@ -7,7 +9,16 @@ class Api::FeaturesController < ApplicationController
 
   # GET /features
   def index
-    @features = Feature.paginate(page: @pagination[:_page], per_page: @pagination[:per_page])
+
+    @features = Feature.where(nil)
+
+    if params[:mag_types].present?
+      req_mag_types = params[:mag_types].split(',')
+      @features = @features.by_mag_type(req_mag_types)
+      puts @features.length
+    end
+
+    @features = @features.paginate(page: @pagination[:page], per_page: @pagination[:per_page])
 
     render json: {
       data: @features,
