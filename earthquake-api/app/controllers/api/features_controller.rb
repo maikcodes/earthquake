@@ -1,32 +1,22 @@
+require 'handlers/pagination'
+
 class Api::FeaturesController < ApplicationController
+  include PaginationHandler
+
   before_action :set_feature, only: %i[ show update destroy ]
 
   # GET /features
   def index
-    page = params[:page].to_i
-    per_page = params[:per_page].to_i
+    @features = Feature.paginate(page: @pagination[:_page], per_page: @pagination[:per_page])
 
-    begin
-      parsed_page = Integer(page)
-      parsed_per_page = Integer(per_page)
-
-      if parsed_page < 1 || parsed_per_page < 1 || parsed_per_page > 1000
-        return render json: { error: 'invalid pagination queries' }, status: :bad_request
-      end
-
-      @features = Feature.paginate(page: parsed_page, per_page: parsed_per_page)
-
-      render json: {
-        data: @features,
-        pagination: {
-          current_page: @features.current_page,
-          total: @features.total_entries,
-          per_page: @features.per_page
-        }
+    render json: {
+      data: @features,
+      pagination: {
+        current_page: @features.current_page,
+        total: @features.total_entries,
+        per_page: @features.per_page
       }
-    rescue ArgumentError
-      render json: { error: 'invalid pagination queries' }, status: :bad_request
-    end
+    }
   end
 
   # GET /features/1
