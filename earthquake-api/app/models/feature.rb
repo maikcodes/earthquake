@@ -14,8 +14,10 @@ class Feature < ApplicationRecord
   validates :external_link, presence: true
 
   # filters
-
   scope :by_mag_type, -> (mag_types) { where(mag_type: mag_types) }
+
+  # associations
+  has_many :comments, dependent: :destroy
 
   def longitude
     coordinates.x if coordinates.present?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_08_211041) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_09_174027) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -91,6 +91,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_211041) do
     t.check_constraint "geometrytype(the_geom) = 'MULTIPOLYGON'::text OR the_geom IS NULL", name: "enforce_geotype_geom"
     t.check_constraint "st_ndims(the_geom) = 2", name: "enforce_dims_geom"
     t.check_constraint "st_srid(the_geom) = 4269", name: "enforce_srid_geom"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "body"
+    t.bigint "feature_id", null: false
+    t.index ["feature_id"], name: "index_comments_on_feature_id"
   end
 
   create_table "county", primary_key: "cntyidfp", id: { type: :string, limit: 5 }, force: :cascade do |t|
@@ -610,4 +618,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_211041) do
     t.string "place", limit: 100, null: false
   end
 
+  add_foreign_key "comments", "features"
 end
