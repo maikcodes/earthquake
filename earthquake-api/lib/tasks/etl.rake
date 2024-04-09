@@ -37,10 +37,12 @@ namespace :etl do
       # end
 
       next unless valid_element?(element)
+      next unless element["properties"]["magType"].in?(Feature::MAG_TYPES)
 
       properties = element["properties"]
       longitude = element["geometry"]["coordinates"][0]
       latitude = element["geometry"]["coordinates"][1]
+
 
       {
         event_type: element["type"],
