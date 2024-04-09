@@ -3,9 +3,30 @@ class Api::FeaturesController < ApplicationController
 
   # GET /features
   def index
-    @features = Feature.all
+    page = params[:page].to_i
+    per_page = params[:per_page].to_i
 
-    render json: @features
+    begin
+      parsed_page = Integer(page)
+      parsed_per_page = Integer(per_page)
+
+      if parsed_page < 1 || parsed_per_page < 1 || parsed_per_page > 1000
+        return render json: { error: 'invalid pagination queries' }, status: :bad_request
+      end
+
+      @features = Feature.paginate(page: parsed_page, per_page: parsed_per_page)
+
+      render json: {
+        data: @features,
+        pagination: {
+          current_page: @features.current_page,
+          total: @features.total_entries,
+          per_page: @features.per_page
+        }
+      }
+    rescue ArgumentError
+      render json: { error: 'invalid pagination queries' }, status: :bad_request
+    end
   end
 
   # GET /features/1
