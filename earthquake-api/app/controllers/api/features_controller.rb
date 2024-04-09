@@ -1,4 +1,4 @@
-class FeaturesController < ApplicationController
+class Api::FeaturesController < ApplicationController
   before_action :set_feature, only: %i[ show update destroy ]
 
   # GET /features
