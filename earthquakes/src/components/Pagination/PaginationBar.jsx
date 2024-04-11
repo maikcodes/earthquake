@@ -21,6 +21,8 @@ function PaginationBar({ paginationObject }) {
             handlePageChange(1)
             handleLimitChange(_limit)
         } else {
+            const lastPage = Math.ceil(totalResults / _limit)
+            if (page > lastPage) handlePageChange(lastPage)
             handleLimitChange(_limit)
         }
     }
@@ -89,6 +91,10 @@ function PaginationBar({ paginationObject }) {
                     <option className='bg-white' value='15'>15</option>
                     <option className='bg-white' value='20'>20</option>
                     <option className='bg-white' value='100'>100</option>
+                    <option className='bg-white' value='250'>250</option>
+                    <option className='bg-white' value='500'>500</option>
+                    <option className='bg-white' value='750'>750</option>
+                    <option className='bg-white' value='1000'>1000</option>
                 </select>
             </div>
         </div>
