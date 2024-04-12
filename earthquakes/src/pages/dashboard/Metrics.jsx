@@ -6,7 +6,7 @@ function Metrics() {
   useEffect(() => {
     const mockDelay = setTimeout(() => {
       console.log("Metrics loaded")
-    }, 2000)
+    }, 0)
 
     return () => clearTimeout(mockDelay)
   }, [])

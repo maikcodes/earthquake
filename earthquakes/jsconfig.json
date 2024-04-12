@@ -7,6 +7,7 @@
             "@services/*": ["src/services/*"],
             "@pages/*": ["src/pages/*"],
             "@hooks/*": ["src/hooks/*"],
+            "@constants/*": ["src/constants/*"],
         }
     },
     "exclude": ["node_modules"]

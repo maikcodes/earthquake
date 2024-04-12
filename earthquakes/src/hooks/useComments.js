@@ -1,7 +1,7 @@
-import { Earthquake } from "@services/Earthquake";
+import { Comment } from "@services/Comment";
 import { useCallback, useEffect, useState } from "react";
 
-function useFeatures(page, limit, filters) {
+function useComments(id, page, limit) {
   const [error, setError] = useState(false);
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -9,20 +9,22 @@ function useFeatures(page, limit, filters) {
   const fetchFeatures = useCallback(async () => {
     try {
       setLoading(true);
-      const earthquakes = await Earthquake.index(page, limit, filters);
+      const earthquakes = await Comment.indexByFeatureId(id, page, limit);
       setData(earthquakes);
     } catch (error) {
       setError(true);
     } finally {
       setLoading(false);
     }
-  }, [page, limit, filters]);
+  }, [id, page, limit]);
 
   useEffect(() => {
     fetchFeatures();
   }, [fetchFeatures]);
 
-  return { data, error, loading };
+  const refetch = () => fetchFeatures();
+
+  return { data, error, loading, refetch };
 }
 
-export default useFeatures;
+export default useComments;

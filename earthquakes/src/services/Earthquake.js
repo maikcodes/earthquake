@@ -1,11 +1,25 @@
-const SERVER_URL = "http://localhost:3000";
+import { SERVER_URL } from "./config";
+import parsePagination from "./utils";
+
 const API_URL = new URL("api/features", SERVER_URL);
 
-export class Earthquakes {
-  static async index(page = 1, limit = 10) {
-    const response = await fetch(
-      new URL(`?page=${page}&per_page=${limit}`, API_URL)
-    );
+export class Earthquake {
+  static async index(page = 1, limit = 10, filters = "") {
+    let url;
+
+    if (filters === "") {
+      url = new URL(
+        `?page=${page}&per_page=${limit}`,
+        API_URL
+      );
+    } else {
+      url = new URL(
+        `?page=${page}&per_page=${limit}&mag_types=${filters}`,
+        API_URL
+      );
+    }
+    
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error("Cannot fetch data from the server.");
@@ -37,11 +51,7 @@ const parseFeature = (feature) => {
 const parseFeatures = (features) => {
   const data = features.data.map(parseFeature);
   return {
-    pagination: {
-      current_page: features.pagination.current_page,
-      total: features.pagination.total,
-      per_page: features.pagination.per_page,
-    },
+    pagination: parsePagination(features?.pagination),
     data,
   };
 };

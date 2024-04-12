@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PaginationIndices, segment } from "../services/PaginationIndices";
+import { PaginationIndices, segment } from "@services/PaginationIndices";
 
 function usePaginationIndices({ page, totalPages, adjacentIndices = 2 }) {
   const [paginationIndices, setPaginationIndices] = useState([]);
