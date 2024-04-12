@@ -3,7 +3,6 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { GiWaveCrest } from "react-icons/gi";
 import { TbWorldLongitude, TbWorldLatitude } from "react-icons/tb";
-import { Card } from "@components/Cards";
 
 
 function FeatureCard({ feature }) {
@@ -12,7 +11,7 @@ function FeatureCard({ feature }) {
     const latitude = feature?.latitude
 
     return (
-        <Card>
+        <article className="hover:cursor-default py-2 px-4 rounded-md shadow-md shadow-black/10 flex flex-col gap-1 border-gray-200/50 border-2 bg-gray-50 lg:hover:border-fg-green-400" >
             <section className="flex flex-row justify-between">
                 <div className="flex flex-row gap-2 text-gray-400 text-sm">
                     <div className="flex flex-row items-center gap-1">
@@ -76,7 +75,7 @@ function FeatureCard({ feature }) {
                     </span>
                 </a>
             </footer>
-        </Card>
+        </article>
     )
 }
 export default FeatureCard

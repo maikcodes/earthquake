@@ -5,9 +5,10 @@ import Filters from "./Filters"
 import { PaginationBar } from "@components/Pagination";
 import usePagination from "@hooks/usePagination";
 import useFeatures from "@hooks/useFeatures";
+import { Suspense } from "react";
 
 function Dashboard() {
-  const { page, limit, handleLimitChange, handlePageChange } = usePagination()
+  const { page, limit, handleLimitChange, handlePageChange } = usePagination(1, 100)
   const { data, error, loading } = useFeatures(page, limit)
 
   const totalResults = data?.pagination?.total
@@ -23,7 +24,9 @@ function Dashboard() {
         <div className="w-full md:w-[35vw] flex flex-col gap-2">
           <Filters />
           <div className="overflow-y-scroll scrollbar-sm">
-            <FeatureList features={data?.data} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <FeatureList features={data?.data} />
+            </Suspense>
           </div>
           <PaginationBar
             paginationObject={

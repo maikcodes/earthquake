@@ -47,4 +47,5 @@
 /* leaflet sizing */
 .leaflet-container {
   height: 100%;
+  z-index: 5;
 }
