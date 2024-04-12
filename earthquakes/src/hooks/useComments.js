@@ -1,30 +1,43 @@
 import { Comment } from "@services/Comment";
-import { useCallback, useEffect, useState } from "react";
+import { useInfiniteQuery } from "react-query";
 
-function useComments(id, page, limit) {
-  const [error, setError] = useState(false);
-  const [data, setData] = useState({});
-  const [loading, setLoading] = useState(false);
+const fetchComments = async (featureId, page, limit) => {
+  const comments = await Comment.indexByFeatureId(featureId, page, limit);
+  const currentPage = comments?.pagination?.current_page;
+  const totalResults = comments?.pagination?.total;
+  const totalPages = Math.ceil(totalResults / limit);
 
-  const fetchFeatures = useCallback(async () => {
-    try {
-      setLoading(true);
-      const earthquakes = await Comment.indexByFeatureId(id, page, limit);
-      setData(earthquakes);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }, [id, page, limit]);
+  let nextCursor;
+  if (totalPages === currentPage) {
+    nextCursor = null;
+  } else {
+    nextCursor = Number(comments.pagination.current_page) + 1;
+  }
 
-  useEffect(() => {
-    fetchFeatures();
-  }, [fetchFeatures]);
+  return {
+    comments: comments?.data,
+    nextCursor,
+  };
+};
 
-  const refetch = () => fetchFeatures();
+function useComments(id, limit) {
+  const { isLoading, isError, data, refetch, fetchNextPage, hasNextPage } =
+    useInfiniteQuery(
+      ["comments", id],
+      async ({ pageParam }) => await fetchComments(id, pageParam, limit),
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      }
+    );
 
-  return { data, error, loading, refetch };
+  return {
+    isLoading,
+    isError,
+    comments: data?.pages.flatMap((page) => page.comments) ?? [],
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+  };
 }
 
 export default useComments;
