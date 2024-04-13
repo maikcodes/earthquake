@@ -13,7 +13,7 @@ function FeatureCard({ feature }) {
     return (
         <article className="hover:cursor-default py-2 px-4 rounded-md shadow-md shadow-black/10 flex flex-col gap-1 border-gray-200/50 border-2 bg-gray-50 lg:hover:border-fg-green-400" >
             <section className="flex flex-row justify-between">
-                <div className="flex flex-row gap-2 text-gray-400 text-sm">
+                <div className="flex md:flex-col flex-row lg:flex-row gap-2 text-gray-400 text-sm">
                     <div className="flex flex-row items-center gap-1">
                         <span>
                             <TbWorldLongitude />
@@ -27,7 +27,7 @@ function FeatureCard({ feature }) {
                         </span>
                         <p>{latitude}</p>
                     </div>
-                    {feature?.id}
+                    {/* {feature?.id} */}
                 </div>
 
                 <div className="flex flex-col items-center text-gray-600">
@@ -42,7 +42,7 @@ function FeatureCard({ feature }) {
                 </div>
             </section>
 
-            <header className="flex flex-row gap-2">
+            <header className="flex flex-row md:flex-col lg:flex-row gap-2">
                 <div className="flex flex-row gap-4">
                     <div className="flex flex-row items-center gap-1">
                         <span className="text-base md:text-2xl font-bold">{magnitude}</span>
@@ -69,7 +69,7 @@ function FeatureCard({ feature }) {
                     className="flex flex-row gap-2 items-center text-indigo-600 underline underline-offset-3 text-sm"
                     href={feature?.external_url} target="_blank" rel="noreferrer"
                 >
-                    <span>See on USGS</span>
+                    <span>USGS</span>
                     <span className="text-sm">
                         <FaExternalLinkAlt />
                     </span>

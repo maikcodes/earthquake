@@ -29,17 +29,22 @@ export class Comment {
   }
 }
 
-const parseComments = (comment) => {
+function parseComments(comment) {
+  const time = new Date(comment.created_at);
+
   return {
     id: comment.id,
     body: comment.body,
+    time: `${time.toLocaleDateString()} at ${time
+      .toLocaleTimeString()
+      .toString()}`,
   };
-};
+}
 
-const parseFeatures = (comments) => {
+function parseFeatures(comments) {
   const data = comments.data.map(parseComments);
   return {
     pagination: parsePagination(comments?.pagination),
     data,
   };
-};
+}

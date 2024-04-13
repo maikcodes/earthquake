@@ -46,7 +46,7 @@ function FeatureComments({ featureId }) {
 
         {comments.length > 0 && comments?.map((comment, index) => {
           return (
-            <BubbleComment key={index} text={comment?.body} />
+            <BubbleComment key={index} text={comment?.body} time={comment?.time} />
           )
         })
         }
