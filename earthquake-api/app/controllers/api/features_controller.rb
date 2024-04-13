@@ -12,10 +12,10 @@ class Api::FeaturesController < ApplicationController
 
     if params[:mag_types].present?
       req_mag_types = params[:mag_types].split(',')
-      @features = @features.by_mag_type(req_mag_types)
+      @features = @features.by_mag_type(req_mag_types).order('time DESC')
     end
 
-    @features = @features.paginate(page: @pagination[:page], per_page: @pagination[:per_page])
+    @features = @features.order('time DESC').paginate(page: @pagination[:page], per_page: @pagination[:per_page])
 
     render json: {
       data: @features,

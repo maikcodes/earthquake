@@ -12,10 +12,10 @@ class Api::CommentsController < ApplicationController
 
     if params[:feature_id].present?
       req_feature_id = params[:feature_id].to_i
-      @comments = @comments.by_feature_id(req_feature_id)
+      @comments = @comments.by_feature_id(req_feature_id).order('created_at DESC')
     end
 
-    @comments = @comments.paginate(page: @pagination[:page], per_page: @pagination[:per_page])
+    @comments = @comments.order('created_at DESC').paginate(page: @pagination[:page], per_page: @pagination[:per_page])
 
     render json: {
       data: @comments,
