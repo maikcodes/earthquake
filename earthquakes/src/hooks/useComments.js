@@ -8,7 +8,7 @@ const fetchComments = async (featureId, page, limit) => {
   const totalPages = Math.ceil(totalResults / limit);
 
   let nextCursor;
-  if (totalPages === currentPage) {
+  if (totalPages === currentPage || totalResults === 0) {
     nextCursor = null;
   } else {
     nextCursor = Number(comments.pagination.current_page) + 1;

@@ -1,4 +1,6 @@
+import { PrimaryButton } from "@components/Buttons"
 import { BubbleComment } from "@components/Comments"
+import { FallbackText } from "@components/Texts"
 import COMMENT_CONSTANTS from "@constants/comments"
 import useComments from "@hooks/useComments"
 import { Comment } from "@services/Comment"
@@ -33,30 +35,25 @@ function FeatureComments({ featureId }) {
   }
 
   if (isError) {
-    return <p>There was an error loading the comments</p>
+    return <FallbackText text='There was an error loading the comments' />
   }
 
   return (
     < div className="py-2 px-4" >
       <div className="flex flex-col max-h-[60vh] gap-2 scrollbar-sm overflow-y-scroll lg:max-h-[50vh] pr-2">
-        {
-          comments?.length === 0 ? <p>No comments were found</p> :
-            comments?.map((comment, index) => {
-              return (
-                <BubbleComment key={index} text={comment?.body} />
-              )
-            })
+
+        {comments.length <= 0 && <p>No comments were found</p>}
+
+        {comments.length > 0 && comments?.map((comment, index) => {
+          return (
+            <BubbleComment key={index} text={comment?.body} />
+          )
+        })
         }
-        {
-          hasNextPage ?
-            <button
-              className="bg-fg-green-400 hover:bg-fg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:cursor-pointer"
-              onClick={() => fetchNextPage()}
-            >
-              Load More comments
-            </button>
-            : <p className="italic text-right text-gray-400">No more comments to load</p>
-        }
+        {comments.length > 0 && hasNextPage && <PrimaryButton text='Load more comments' handleClick={() => fetchNextPage()} />}
+        {comments.length > 0 && !hasNextPage && <div className="text-right">
+          <FallbackText text='No more comments to load' />
+        </div>}
       </div>
       {
         <form className='flex flex-col lg:flex-row gap-2 w-full mt-2' >

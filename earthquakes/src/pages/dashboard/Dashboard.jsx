@@ -6,6 +6,7 @@ import { PaginationBar } from "@components/Pagination";
 import usePagination from "@hooks/usePagination";
 import useFeatures from "@hooks/useFeatures";
 import { useState } from "react";
+import { FallbackText } from "@components/Texts";
 
 function Dashboard() {
   const [filters, setFilters] = useState('')
@@ -30,7 +31,7 @@ function Dashboard() {
           <Filters handleFiltersChange={handleFiltersChange}/>
           <div className="overflow-y-scroll scrollbar-sm">
             {loading && <p>Loading...</p>}
-            {error && <p>Error fetching features</p>}
+            {error && <FallbackText text='There was an error loading features' />}
             <FeaturesList features={data?.data} />
           </div>
 
