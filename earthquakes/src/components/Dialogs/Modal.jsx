@@ -29,14 +29,6 @@ function Modal({ children, isOpen, onClose, tab, handleChangeTab }) {
                         <div>
                             {children}
                         </div>
-
-                        {/* <div className='flex flex-col gap-2 lg:flex-row lg:items-center p-4 border-t border-gray-300 justify-end'>
-                            <button
-                                className='bg-gray-300 hover:bg-gray-400 text-gray-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-                                onClick={onClose}>
-                                Close
-                            </button>
-                        </div> */}
                     </div>
                 </div>
             </div>

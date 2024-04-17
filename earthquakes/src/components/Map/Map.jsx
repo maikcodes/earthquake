@@ -32,9 +32,12 @@ function Map({ features }) {
                 {features?.map((feature, index) => (
                     <Marker key={index} position={[feature?.latitude, feature?.longitude]}>
                         <Popup>
-                            <h3>{feature?.title}</h3>
-                            <p><strong>Magnitude:</strong> {feature?.magnitude}</p>
-                            <p><strong>Place:</strong> {feature?.place}</p>
+                            <h3 className='font-bold'>{feature?.place}</h3>
+                            <p className="text-gray-500">{feature?.title}</p>
+                            <p><span className='font-bold'>magnitude: </span>{feature?.magnitude} ({feature?.mag_type})</p>
+                            <p><span className='font-bold'>longitude: </span>{feature?.longitude}</p>
+                            <p><span className='font-bold'>latitude: </span>{feature?.latitude}</p>
+
                             <a href={feature?.external_url} target="_blank" rel="noopener noreferrer">See more</a>
                         </Popup>
                     </Marker>

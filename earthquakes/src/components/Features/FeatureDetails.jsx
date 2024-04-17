@@ -23,43 +23,43 @@ function FeatureDetails({ feature }) {
 
                     <div className='flex flex-col md:grid md:grid-cols-2 gap-2'>
                         <div className="flex flex-row gap-2">
-                            <p className="uppercase font-bold">id</p>
+                            <p className="uppercase font-bold">id:</p>
                             <p>{feature?.id}</p>
                         </div>
                         <div className="flex flex-row gap-2">
-                            <p className="uppercase font-bold">usgs id</p>
+                            <p className="uppercase font-bold">usgs id:</p>
                             <p>{feature?.external_id}</p>
                         </div>
                         <div className="flex flex-col">
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">magnitude</p>
+                                <p className="capitalize font-bold">magnitude:</p>
                                 <p>{feature?.magnitude}</p>
                             </div>
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">magnitude type</p>
+                                <p className="capitalize font-bold">magnitude type:</p>
                                 <p>{feature?.mag_type}</p>
                             </div>
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">longitude</p>
+                                <p className="capitalize font-bold">longitude:</p>
                                 <p>{feature?.longitude}</p>
                             </div>
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">latitude</p>
+                                <p className="capitalize font-bold">latitude:</p>
                                 <p>{feature?.latitude}</p>
                             </div>
                         </div>
 
                         <div className="flex flex-col">
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">type</p>
+                                <p className="capitalize font-bold">type:</p>
                                 <p>{feature?.type}</p>
                             </div>
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">date</p>
+                                <p className="capitalize font-bold">date:</p>
                                 <p>{feature?.time} UTC</p>
                             </div>
                             <div className="flex flex-row gap-2">
-                                <p className="capitalize font-bold">tsunami</p>
+                                <p className="capitalize font-bold">tsunami:</p>
                                 <p className="uppercase">{feature?.tsunami ? 'Yes' : 'No'}</p>
                             </div>
                         </div>

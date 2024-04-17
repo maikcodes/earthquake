@@ -1,6 +1,7 @@
 import { PrimaryButton } from "@components/Buttons"
 import { BubbleComment } from "@components/Comments"
 import { FallbackText } from "@components/Texts"
+import { CommentsSkeleton } from "@components/skeletons"
 import COMMENT_CONSTANTS from "@constants/comments"
 import useComments from "@hooks/useComments"
 import { Comment } from "@services/Comment"
@@ -31,18 +32,22 @@ function FeatureComments({ featureId }) {
   }
 
   if (isLoading) {
-    return <p>Loading comments</p>
+    return <CommentsSkeleton />
   }
 
   if (isError) {
-    return <FallbackText text='There was an error loading the comments' />
+    return (
+      <div className="p-4">
+        <FallbackText text='There was an error loading the comments' />
+      </div>
+    )
   }
 
   return (
-    < div className="py-2 px-4" >
-      <div className="flex flex-col max-h-[60vh] gap-2 scrollbar-sm overflow-y-scroll lg:max-h-[50vh] pr-2">
+    <div className="p-4" >
+      <div className="flex flex-col max-h-[60vh] gap-2 scrollbar-sm overflow-y-scroll lg:max-h-[50vh] p-2">
 
-        {comments.length <= 0 && <p>No comments were found</p>}
+        {comments.length <= 0 && <FallbackText text='No comments were found' />}
 
         {comments.length > 0 && comments?.map((comment, index) => {
           return (

@@ -39,13 +39,15 @@ function PaginationBar({ paginationObject }) {
 
     return (
         <div className='flex flex-col items-center justify-center md:justify-between gap-y-2'>
-            <div className={`w-full md:w-auto ${paginationIndices.length > 7 ? 'grid grid-cols-7' : 'flex'} md:grid-cols-6 lg:flex lg:flex-row justify-center items-center gap-2 md:gap-y-2`}>
+            <div className={`w-full md:w-auto flex flex-wrap items-center gap-2`}>
+
                 <button
                     className={`px-2 h-8 ${page === 1 ? 'lg:hover:cursor-not-allowed' : 'lg:hover:cursor-pointer lg:hover:bg-fg-green-300'} rounded-md shadow-md shadow-black/10 bg-gray-50 flex items-center text-gray-600`}
                     onClick={handlePreviousPage}
                 >
                     <IoIosArrowBack />
                 </button>
+
                 {
                     paginationIndices.map((pageIndex, index) => (
                         pageIndex === '...'
@@ -54,35 +56,28 @@ function PaginationBar({ paginationObject }) {
                                 <button
                                     key={index}
                                     onClick={() => handlePageChange(pageIndex)}
-                                    className={`px-2 h-8 ${pageIndex === page ? 'bg-fg-green-200' : 'bg-gray-50'} lg:hover:bg-fg-green-300 flex items-center rounded-md shadow-md shadow-black/10 text-gray-600`}
+                                    className={`px-2 h-8 ${pageIndex === page ? 'bg-fg-green-200' : 'bg-gray-50'} lg:hover:bg-fg-green-300 flex items-center rounded-md shadow-md shadow-black/10 text-gray-600 justify-center`}
                                 >
                                     {pageIndex}
                                 </button>
                             )
                     ))
                 }
+
                 <button
                     className={`px-2 h-8 ${page === totalPages ? 'lg:hover:cursor-not-allowed' : 'lg:hover:cursor-pointer lg:hover:bg-fg-green-300'} rounded-md shadow-md shadow-black/10 bg-gray-50 flex items-center text-gray-600`}
                     onClick={handleNextPage}
                 >
                     <IoIosArrowForward />
                 </button>
+
             </div>
 
-            <div className='flex flex-row items-center gap-y-2'>
-                <div className='flex flex-row justify-center text-gray-600'>
-                    <p className=''>
-                        Showing
-                        <span className='text-sm font-bold'> {results} </span>
-                        ({generateStartResults()} - {generateEndResults()})
-                        of
-                        <span className='text-sm font-bold'> {totalResults} </span>
-                        results
-                    </p>
-                </div>
+            <div className='flex flex-col items-center gap-2'>
+
                 <select
                     id='results'
-                    className='text-sm bg-gray-50 mx-2 rounded-lg px-2 py-1'
+                    className='text-sm bg-gray-50 mx-2 rounded-lg px-4 py-1 md:h-full lg:h-auto shadow-md shadow-black/10 w-full'
                     defaultValue={limit}
                     onChange={_handleLimitChange}
                 >
@@ -93,6 +88,22 @@ function PaginationBar({ paginationObject }) {
                     <option className='bg-white' value='250'>250</option>
                     <option className='bg-white' value='500'>500</option>
                 </select>
+
+                <div className='flex flex-row justify-center text-gray-600'>
+                    <p className='flex md:flex-col lg:flex-row gap-x-2'>
+                        <span className='flex flex-row gap-2 items-center justify-center'>
+                            <span className='text-sm'>Showing</span>
+                            <span className='text-sm font-bold'>{results}</span>
+                            <span className='text-sm'>({generateStartResults()} - {generateEndResults()})</span>
+                        </span>
+                        <span className='flex flex-row gap-2 items-center justify-center'>
+                            <span className='text-sm'>of</span>
+                            <span className='text-sm font-bold'>{totalResults}</span>
+                            <span className='text-sm'>results</span>
+                        </span>
+                    </p>
+                </div>
+
             </div>
         </div>
     )

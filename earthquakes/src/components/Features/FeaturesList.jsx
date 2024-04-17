@@ -5,7 +5,7 @@ import { Modal } from "@components/Dialogs"
 import FeatureDetails from "./FeatureDetails"
 import FeatureComments from "./FeatureComments"
 
-function FeatureList({ features }) {
+function FeaturesList({ features }) {
     const [feature, setFeature] = useState({})
     const [tab, setTab] = useState('details')
     const featureDetailsModal = useModal()
@@ -45,4 +45,4 @@ function FeatureList({ features }) {
         </div >
     )
 }
-export default FeatureList
+export default FeaturesList

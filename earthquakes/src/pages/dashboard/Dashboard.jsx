@@ -1,17 +1,18 @@
 import { FeaturesList } from "@components/Features"
 import { Map } from "@components/Map"
-// import Metrics from "./Metrics"
 import Filters from "./Filters"
 import { PaginationBar } from "@components/Pagination";
 import usePagination from "@hooks/usePagination";
 import useFeatures from "@hooks/useFeatures";
 import { useState } from "react";
 import { FallbackText } from "@components/Texts";
+import { FeaturesListSkeleton, FiltersSkeleton, MapSkeleton, PaginationBarSkeleton } from "@components/skeletons";
 
 function Dashboard() {
   const [filters, setFilters] = useState('')
   const { page, limit, handleLimitChange, handlePageChange } = usePagination()
   const { data, error, loading } = useFeatures(page, limit, filters)
+  const features = data?.data
 
   const totalResults = data?.pagination?.total
   const totalPages = Math.ceil(totalResults / limit)
@@ -21,31 +22,54 @@ function Dashboard() {
   }
 
   return (
-    <section className="flex flex-col w-screen h-screen p-2 md:p-3 lg:p-5 bg-slate-300/30 gap-4">
-      {/* <div className="flex flex-col md:flex-row gap-2 md:h-[20vh]">
-        <Metrics />
-      </div> */}
-
-      <div className="flex flex-col md:flex-row md:h-full gap-x-4">
+    <section className="flex flex-col w-screen h-auto md:h-screen p-2 md:p-3 lg:p-5 bg-slate-300/30 gap-4">
+      <div className="flex flex-col-reverse md:flex-row md:h-full gap-4">
+        
         <div className="w-full md:w-[35vw] flex flex-col gap-2">
-          <Filters handleFiltersChange={handleFiltersChange}/>
-          <div className="overflow-y-scroll scrollbar-sm">
-            {loading && <p>Loading...</p>}
-            {error && <FallbackText text='There was an error loading features' />}
-            <FeaturesList features={data?.data} />
+
+          {loading && <FiltersSkeleton />}
+          {!error && !loading && <Filters handleFiltersChange={handleFiltersChange} />}
+
+          <div className="overflow-y-scroll scrollbar-sm h-[50vh] md:h-auto">
+            {
+              error && <div className="bg-gray-200 flex flex-row h-[90vh] min-h-max w-full items-center justify-center">
+                <FallbackText text='There was an error loading features' />
+              </div>
+            }
+
+            {loading && <FeaturesListSkeleton />}
+            {!error && !loading && <FeaturesList features={features} />}
           </div>
 
-          <PaginationBar
-            paginationObject={
-              { page, limit, handleLimitChange, handlePageChange, totalPages, results: data?.data?.length, totalResults }
-            }
-          />
+          {loading && <PaginationBarSkeleton />}
+          {
+            !loading && <PaginationBar
+              paginationObject={
+                {
+                  page,
+                  limit,
+                  handleLimitChange,
+                  handlePageChange,
+                  totalPages,
+                  results: features?.length,
+                  totalResults
+                }
+              }
+            />
+          }
 
         </div>
 
-        <div className="w-full md:w-[70vw] rounded-lg overflow-hidden">
-          <Map features={data?.data} />
+        <div className="w-full md:w-[70vw] rounded-lg overflow-hidden h-[50vh] md:h-auto">
+          {
+            error && <div className="bg-gray-200 flex flex-row h-[90vh] min-h-max w-full items-center justify-center">
+              <FallbackText text='There was an error loading the map' />
+            </div>
+          }
+          {loading && <MapSkeleton />}
+          {!error && !loading && <Map features={features} />}
         </div>
+      
       </div>
     </section>
   )
