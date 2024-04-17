@@ -34,7 +34,6 @@ class Api::FeaturesController < ApplicationController
 
   # POST /features
   def create
-    puts "create feature #{feature_params}"
     @feature = Feature.new(feature_params)
 
     if @feature.save
@@ -66,6 +65,6 @@ class Api::FeaturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feature_params
-      params.require(:feature).permit(:event_type, :external_id, :magnitude, :place, :time, :tsunami, :mag_type, :title, :longitude, :latitude, :external_link)
+      params.require(:feature).permit(:event_type, :external_id, :magnitude, :place, :time, :tsunami, :mag_type, :title, :longitude, :latitude, :external_url)
     end
 end
