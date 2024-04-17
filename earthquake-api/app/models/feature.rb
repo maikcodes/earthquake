@@ -18,7 +18,7 @@ class Feature < ApplicationRecord
   validates :title, presence: true
   validates :longitude, numericality: { greater_than_or_equal_to: -180.0, less_than_or_equal_to: 180.0 }, presence: true
   validates :latitude, numericality: { greater_than_or_equal_to: -90.0, less_than_or_equal_to: 90.0 }, presence: true
-  validates :external_link, presence: true
+  validates :external_url, presence: true
 
   # associations
   has_many :comments, dependent: :destroy
@@ -53,7 +53,7 @@ class Feature < ApplicationRecord
         }
       },
       links: {
-        external_url: external_link
+        external_url: external_url
       }
     }
   end

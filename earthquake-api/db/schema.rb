@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_09_174027) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_17_205609) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -338,7 +338,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_174027) do
     t.string "mag_type", null: false
     t.string "title", null: false
     t.geography "coordinates", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}, null: false
-    t.string "external_link", null: false
+    t.string "external_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_features_on_external_id", unique: true
