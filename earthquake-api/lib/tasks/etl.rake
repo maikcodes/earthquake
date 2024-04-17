@@ -10,8 +10,11 @@ namespace :etl do
 
     puts "Start ETL process for Earthquake data from USGS 🌍"
     raw_data = extract_data(url)
+
     transformed_data = transform_data(raw_data)
-    load_data(transformed_data)
+    reversed_data = transformed_data.reverse()
+
+    load_data(reversed_data)
     puts "ETL process finished successfully ✅"
   end
 
@@ -54,7 +57,7 @@ namespace :etl do
         mag_type: properties["magType"],
         title: properties["title"],
         coordinates: transform_coordinates(longitude, latitude),
-        external_link: properties["url"],
+        external_url: properties["url"],
       }
     end
 
@@ -66,7 +69,7 @@ namespace :etl do
 
   def load_data(transformed_data)
     puts "Loading data"
-    Feature.insert_all(transformed_data)
+    inserted = Feature.insert_all(transformed_data)
     puts "Data loaded successfully ✅"
   end
 
