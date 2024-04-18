@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgis/postgis
+    container_name: earthquakes_postgis_db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgis_data_earthquake:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: earthquakes_api
+    command: "./bin/rails server -b 0.0.0.0"
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+      - POSTGIS_HOST=${POSTGIS_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
+  earthquakes:
+    build: ../earthquakes
+    container_name: earthquakes
+    ports:
+      - "4000:4000"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgis_data_earthquake: {}
