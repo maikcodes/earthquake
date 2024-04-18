@@ -1,6 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { markerIcon } from './Icons';
+
 
 function Map({ features }) {
     return (
@@ -30,7 +32,7 @@ function Map({ features }) {
                 chunkedLoading
             >
                 {features?.map((feature, index) => (
-                    <Marker key={index} position={[feature?.latitude, feature?.longitude]}>
+                    <Marker key={index} position={[feature?.latitude, feature?.longitude]} icon={markerIcon}>
                         <Popup>
                             <h3 className='font-bold'>{feature?.place}</h3>
                             <p className="text-gray-500">{feature?.title}</p>

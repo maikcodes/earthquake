@@ -49,3 +49,9 @@
   height: 100%;
   z-index: 5;
 }
+
+.leaflet-control-layers-toggle {
+  background-image: url('/layers.png');
+  width: 36px;
+  height: 36px;
+}
