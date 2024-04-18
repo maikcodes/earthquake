@@ -81,7 +81,7 @@ Las validaciones se han realizado en base al modelo que describe a una [feature]
 
 ### Endpoints y paginado
 
-Los endpoints solicitados se han desarrollado de forma correcta y adicionalmente se ha completado los demás métodos HTTP comunes, razón por la cual la aplicación backend es una API RESTful. Si usa la extención de visual studio code ![Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) puede probar rápidamente los endpoints con las apis de [Features](api-docs/feature.http) y [Comments](api-docs/comment.http)
+Los endpoints solicitados se han desarrollado de forma correcta y adicionalmente se ha completado los demás métodos HTTP comunes, razón por la cual la aplicación backend es una API RESTful. Si usa la extención de visual studio code [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) puede probar rápidamente los endpoints con las apis de [Features](api-docs/feature.http) y [Comments](api-docs/comment.http)
 
 Para realizar la paginación se emplea la gema __will_paginate__, ya que permite que se realice el paginado de manera fácil y rápida. Esto tanto para las features como para los comentarios. La paginación se realiza de forma automática dando un total de 10 resultados para cada solicitud con los formatos de respuesta solicitados (JSON), si se necesita definir una página exacta o la cantidad de elementos por página se debe hacer uso de los parámetros de paginación, ambos esperan un número entero positivo, puede ser usados independientemente el uno del otro.
 
