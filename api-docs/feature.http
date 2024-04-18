@@ -1,0 +1,57 @@
+### Get all  features
+GET http://localhost:3000/api/features
+
+### Get all features in specific page and per_page per page
+GET http://localhost:3000/api/features?page=10&per_page=20
+
+### Get all features filtered by mag_types parameter
+GET http://localhost:3000/api/features?mag_types=md,ml
+
+### Example with all parameters
+GET http://localhost:3000/api/features?mag_types=md,ml&page=10&per_page=20
+
+### Get feature by id
+GET http://localhost:3000/api/features/1
+
+### Create a new feature
+POST http://localhost:3000/api/features
+Content-Type: application/json
+
+{
+    "feature": {
+        "event_type": "md",
+        "external_id": "asdqwe123",
+        "magnitude": "5",
+        "place": "Ecuador Test",
+        "time": "2024-04-20 15:56:24",
+        "tsunami": true,
+        "mag_type": "md",
+        "title": "M 5 - Ecuador Test",
+        "longitude": -78.52495,
+        "latitude": -0.22985,
+        "external_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000masf"
+    }
+}
+
+### Update a feature
+PUT http://localhost:3000/api/features/1
+Content-Type: application/json
+
+{
+    "feature": {
+        "event_type": "md",
+        "external_id": "123asdqwe",
+        "magnitude": "5",
+        "place": "Ecuador Test",
+        "time": "2024-04-20 15:56:24",
+        "tsunami": true,
+        "mag_type": "md",
+        "title": "M 5 - Ecuador Test",
+        "longitude": -78.52495,
+        "latitude": -0.22985,
+        "external_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000masf"
+    }
+}
+
+### Delete a feature
+DELETE http://localhost:3000/api/features/1
