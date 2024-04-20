@@ -22,7 +22,7 @@ function Dashboard() {
   }
 
   return (
-    <section className="flex flex-col w-screen h-auto md:h-screen p-2 md:p-3 lg:p-5 bg-slate-300/30 gap-4">
+    <section className="flex flex-col w-screen h-auto md:h-screen p-2 md:p-3 lg:p-5 bg-neutral-100 gap-4">
       <div className="flex flex-col-reverse md:flex-row md:h-full gap-4">
         
         <div className="w-full md:w-[35vw] flex flex-col gap-2">
@@ -30,7 +30,7 @@ function Dashboard() {
           {loading && <FiltersSkeleton />}
           {!error && !loading && <Filters handleFiltersChange={handleFiltersChange} />}
 
-          <div className="overflow-y-scroll scrollbar-sm h-[50vh] md:h-auto">
+          <div className="h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-y-hidden">
             {
               error && <div className="bg-gray-200 flex flex-row h-[90vh] min-h-max w-full items-center justify-center">
                 <FallbackText text='There was an error loading features' />
@@ -60,7 +60,7 @@ function Dashboard() {
 
         </div>
 
-        <div className="w-full md:w-[70vw] rounded-lg overflow-hidden h-[50vh] md:h-auto">
+        <div className="w-full md:w-[70vw] overflow-hidden h-[50vh] md:h-auto rounded-md shadow-md shadow-gray-400">
           {
             error && <div className="bg-gray-200 flex flex-row h-[90vh] min-h-max w-full items-center justify-center">
               <FallbackText text='There was an error loading the map' />

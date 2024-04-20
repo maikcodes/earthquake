@@ -39,10 +39,10 @@ function PaginationBar({ paginationObject }) {
 
     return (
         <div className='flex flex-col items-center justify-center md:justify-between gap-y-2'>
-            <div className={`w-full md:w-auto flex flex-wrap items-center gap-2`}>
+            <div className='w-full md:w-auto flex flex-wrap items-center gap-2'>
 
                 <button
-                    className={`px-2 h-8 ${page === 1 ? 'lg:hover:cursor-not-allowed' : 'lg:hover:cursor-pointer lg:hover:bg-fg-green-300'} rounded-md shadow-md shadow-black/10 bg-gray-50 flex items-center text-gray-600`}
+                    className={`px-2 h-8 ${page === 1 ? 'lg:hover:cursor-not-allowed' : 'lg:hover:cursor-pointer lg:hover:bg-fg-green-300'} rounded-md shadow-md shadow-gray-400 bg-gray-50 flex items-center text-gray-600`}
                     onClick={handlePreviousPage}
                 >
                     <IoIosArrowBack />
@@ -56,7 +56,7 @@ function PaginationBar({ paginationObject }) {
                                 <button
                                     key={index}
                                     onClick={() => handlePageChange(pageIndex)}
-                                    className={`px-2 h-8 ${pageIndex === page ? 'bg-fg-green-200' : 'bg-gray-50'} lg:hover:bg-fg-green-300 flex items-center rounded-md shadow-md shadow-black/10 text-gray-600 justify-center`}
+                                    className={`px-2 h-8 ${pageIndex === page ? 'bg-fg-green-200' : 'bg-gray-50'} lg:hover:bg-fg-green-300 flex items-center rounded-md shadow-md shadow-gray-400 text-gray-600 justify-center`}
                                 >
                                     {pageIndex}
                                 </button>
@@ -65,7 +65,7 @@ function PaginationBar({ paginationObject }) {
                 }
 
                 <button
-                    className={`px-2 h-8 ${page === totalPages ? 'lg:hover:cursor-not-allowed' : 'lg:hover:cursor-pointer lg:hover:bg-fg-green-300'} rounded-md shadow-md shadow-black/10 bg-gray-50 flex items-center text-gray-600`}
+                    className={`px-2 h-8 ${page === totalPages ? 'lg:hover:cursor-not-allowed' : 'lg:hover:cursor-pointer lg:hover:bg-fg-green-300'} rounded-md shadow-md shadow-gray-400 bg-gray-50 flex items-center text-gray-600`}
                     onClick={handleNextPage}
                 >
                     <IoIosArrowForward />
@@ -77,7 +77,7 @@ function PaginationBar({ paginationObject }) {
 
                 <select
                     id='results'
-                    className='text-sm bg-gray-50 mx-2 rounded-lg px-4 py-1 md:h-full lg:h-auto shadow-md shadow-black/10 w-full'
+                    className='text-sm bg-gray-50 mx-2 rounded-lg px-4 py-1 md:h-full lg:h-auto shadow-md shadow-gray-400 w-full'
                     defaultValue={limit}
                     onChange={_handleLimitChange}
                 >
@@ -87,6 +87,7 @@ function PaginationBar({ paginationObject }) {
                     <option className='bg-white' value='100'>100</option>
                     <option className='bg-white' value='250'>250</option>
                     <option className='bg-white' value='500'>500</option>
+                    <option className='bg-white' value='1000'>1000</option>
                 </select>
 
                 <div className='flex flex-row justify-center text-gray-600'>

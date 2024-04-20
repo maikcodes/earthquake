@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Modal } from "@components/Dialogs"
 import FeatureDetails from "./FeatureDetails"
 import FeatureComments from "./FeatureComments"
+import { Virtuoso } from 'react-virtuoso'
 
 function FeaturesList({ features }) {
     const [feature, setFeature] = useState({})
@@ -22,13 +23,25 @@ function FeaturesList({ features }) {
     }
 
     return (
-        <div className="flex flex-col gap-2 pr-1">
-            {features?.map((_feature, index) => (
-                <button key={index} onClick={() => handleOpenModal(featureDetailsModal.handleOpen, _feature.id)} >
-                    <FeatureCard feature={_feature} />
-                </button>
-            ))
-            }
+        <div className="h-auto">
+
+            <Virtuoso
+                className="!h-[50vh] md:!h-[60vh] lg:!h-[70vh] scrollbar-sm"
+                data={features}
+                itemContent={(_, feature) => (
+                    <button
+                        className="w-full mb-2"
+                        onClick={
+                            () => handleOpenModal(
+                                featureDetailsModal.handleOpen,
+                                feature.id
+                            )
+                        }
+                    >
+                        <FeatureCard feature={feature} />
+                    </button>
+                )}
+            />
 
             <Modal
                 isOpen={featureDetailsModal.isOpen}

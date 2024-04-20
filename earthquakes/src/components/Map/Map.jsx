@@ -3,7 +3,6 @@ import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import { markerIcon } from './Icons';
 
-
 function Map({ features }) {
     return (
         <MapContainer
@@ -15,16 +14,16 @@ function Map({ features }) {
             maxBounds={[[-90, -180], [90, 180]]}
         >
             <LayersControl position="topright">
-                <LayersControl.BaseLayer name="OpenStreetMap" checked>
-                    <TileLayer
-                        // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                </LayersControl.BaseLayer>
-                <LayersControl.BaseLayer name="Esri Satellite">
+                <LayersControl.BaseLayer name="Esri Satellite" checked>
                     <TileLayer
                         // attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
                         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                    />
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="OpenStreetMap">
+                    <TileLayer
+                        // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                 </LayersControl.BaseLayer>
             </LayersControl>

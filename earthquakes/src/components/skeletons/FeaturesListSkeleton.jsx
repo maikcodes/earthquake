@@ -1,6 +1,6 @@
 export function FiltersSkeleton() {
   return (
-    <div className="max-w-min flex flex-row items-center py-2 px-4 rounded-md shadow-md shadow-black/10 bg-gray-300 animate-pulse">
+    <div className="max-w-min flex flex-row items-center py-2 px-4 rounded-md shadow-md shadow-gray-400 bg-gray-300 animate-pulse">
       <div className="bg-gray-400/60 animate-pulse h-6 w-20 rounded-md"></div>
     </div>
   )
@@ -8,7 +8,7 @@ export function FiltersSkeleton() {
 
 export function FeatureCardSkeleton() {
   return (
-    <div className="py-2 px-4 rounded-md shadow-md shadow-black/10 flex flex-col gap-2 border-gray-200/50 border-2 bg-gray-300 animate-pulse" >
+    <div className="py-2 px-4 rounded-md shadow-md shadow-gray-400 flex flex-col gap-2 border-gray-200/50 border-2 bg-gray-300 animate-pulse" >
 
       <div className="flex flex-row md:flex-col lg:flex-row justify-between gap-2">
 
@@ -19,7 +19,7 @@ export function FeatureCardSkeleton() {
           </div>
 
           <div className="flex flex-row md:justify-center">
-            <div className="bg-gray-400/60 rounded-md animate-pulse h-5 w-20 md:w-28"></div>
+            <div className="bg-gray-400/60 rounded-md animate-pulse h-5 w-20 md:w-24"></div>
           </div>
 
         </div>
@@ -75,7 +75,7 @@ export function FeaturesListSkeleton() {
 
 function PaginationButtonSkeleton() {
   return (
-    <div className="h-7 w-8 bg-gray bg-gray-400/60 animate-pulse rounded-md shadow-md shadow-black/10 "></div>
+    <div className="h-7 w-6 bg-gray bg-gray-400/60 animate-pulse rounded-md shadow-md shadow-gray-400 "></div>
   )
 }
 

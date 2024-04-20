@@ -11,7 +11,7 @@ function FeatureCard({ feature }) {
     const latitude = feature?.latitude
 
     return (
-        <article className="hover:cursor-default py-2 px-4 rounded-md shadow-md shadow-black/10 flex flex-col gap-1 border-gray-100 border-2 bg-gray-50 lg:hover:border-fg-green-400">
+        <article className="hover:cursor-default py-2 px-4 rounded-md shadow-md shadow-gray-400 flex flex-col gap-1 border-gray-100 border-2 bg-gray-50 lg:hover:border-fg-green-400">
             <section className="flex flex-row md:flex-col lg:flex-row justify-between">
                 <div className="flex md:flex-col flex-row lg:flex-row gap-2 text-gray-400 text-sm text-start md:text-center lg:text-start">
                     <div className="flex flex-row items-center gap-1 justify-start md:justify-center lg:justify-start">
