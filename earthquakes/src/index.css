@@ -3,29 +3,27 @@
 @tailwind utilities;
 
 @layer utilities {
-  @variants responsive {
-    .no-scrollbar {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-    }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 
-    .scrollbar-sm::-webkit-scrollbar {
-      width: 8px;
-    }
+  .scrollbar-sm::-webkit-scrollbar {
+    width: 8px;
+  }
 
-    .scrollbar-sm::-webkit-scrollbar-track {
-      background: #e9e7eb;
-      border-radius: 5px;
-    }
+  .scrollbar-sm::-webkit-scrollbar-track {
+    background: #e9e7eb;
+    border-radius: 5px;
+  }
 
-    .scrollbar-sm::-webkit-scrollbar-thumb {
-      background: #c7ebcb;
-      border-radius: 5px;
-    }
+  .scrollbar-sm::-webkit-scrollbar-thumb {
+    background: #c7ebcb;
+    border-radius: 5px;
+  }
 
-    .scrollbar-sm::-webkit-scrollbar-thumb:hover {
-      background: #9cd9a3;
-    }
+  .scrollbar-sm::-webkit-scrollbar-thumb:hover {
+    background: #9cd9a3;
   }
 }
 
@@ -51,7 +49,7 @@
 }
 
 .leaflet-control-layers-toggle {
-  background-image: url('/layers.png');
+  background-image: url("/layers.png");
   width: 36px;
   height: 36px;
 }
